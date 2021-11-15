@@ -3,9 +3,39 @@ const bodyParser=require('body-parser')
 const app=express()
 const bot=require('./tele')
 var beautify = require("json-beautify");
-app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(bodyParser.json())
+const path=require('path');
+const mongoose=require('mongoose');
+//const config=require('./config');
+const userRoute=require('./routes/userRoute');
+const productRoute=require('./routes/productRoute')
+const orderRoute=require('./routes/orderRoute')
+
+var mongoDB = 'mongodb://localhost:27017/my_db';
+
+mongoose.connect(mongoDB).then(()=>{
+  console.log('MongoDB Created!!');
+  }).catch((error) =>{
+  console.log(error)
+  console.log("asdf")
+});;
+
+//var db=mongoose.connection;
+
+var personSchema = mongoose.Schema({
+    name: String,
+    age: Number,
+    nationality: String
+ });
+ var Person = mongoose.model("Person", personSchema);
+
+ var newPerson = new Person({
+    "name": "Hamza",
+    "age": "14"
+    
+ });
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
 var cors = require('cors');
 app.use(cors());
 
@@ -18,7 +48,17 @@ app.post('/',(req,res)=>{
 })
 
 app.get('/',(req,res)=>{
-    res.send("Hello")
+    
+    console.log("working fine!!")
+    newPerson.save().then(()=>res.send("success!!")).catch((err)=>{console.log("error")})
 })
 
-app.listen(3000)
+app.use('/api/users',userRoute);
+
+app.use('/api/products', productRoute);
+
+app.use('/api/orders', orderRoute);
+
+app.listen(8000,()=>{
+    console.log(`http://localhost:8000`)
+})

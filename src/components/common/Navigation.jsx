@@ -67,7 +67,9 @@ const Navigation = () => {
     );
   }
   return (
-    <nav className="navigation" ref={navbar}>
+    <div>
+      <div style={{backgroundColor:'#8A2BE2',height:'30px',alignContent:'center',display:'flex',display:'flex'}}><p style={{height:'100%',width:'100%', color:'white', textAlign:'center',position:'relative', margin:'1px',padding:'1px'}}>Email: pharma.xport599@protonmail.com | Call: +1(786)-545-8645 </p></div>
+    <nav className="navigation" ref={navbar} style={{marginTop:'1.5%'}}>
       <div className="logo">
         <Link onClick={onClickLink} to="/"><img alt="Logo" src={logo} /></Link>
       </div>
@@ -131,7 +133,9 @@ const Navigation = () => {
           </li>
         )}
       </ul>
+     
     </nav>
+    </div>
   );
 };
 

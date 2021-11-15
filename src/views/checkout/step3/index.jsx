@@ -1,4 +1,4 @@
-import { CHECKOUT_STEP_1 } from 'constants/routes';
+import { CHECKOUT_STEP_1, CHECKOUT_STEP_4 } from 'constants/routes';
 import { Form, Formik } from 'formik';
 import { displayActionMessage } from 'helpers/utils';
 import { useDocumentTitle, useScrollTop } from 'hooks';
@@ -50,7 +50,7 @@ const Payment = ({ basket, shipping, payment, subtotal }) => {
   };
 
   const onConfirm = () => {
-    alert("Hello"+basket)
+  //  alert("Hello"+basket)
     displayActionMessage('Feature not ready yet :)', 'info');
   };
 
@@ -71,16 +71,17 @@ const Payment = ({ basket, shipping, payment, subtotal }) => {
             //alert(product.id+" "+product.name+" "+product.quantity)
             JSON.stringify(product)
           })
-          alert(JSON.stringify(basket))
-          axios.post('http://localhost:3000/',JSON.stringify(basket))
+         // alert(JSON.stringify(basket))
+          axios.post('http://localhost:8000/',JSON.stringify(basket))
           .then(function (response) {
             displayActionMessage('Feature not ready yet :)', 'info');
-            dispatch(clearBasket());
+            history.push(CHECKOUT_STEP_4)
+            //dispatch(clearBasket());
             //history.push('/');
             //alert(response);
           })
           .catch(function (error) {
-            alert(error);
+           // alert(error);
           });
             //alert(JSON.stringify(shipping))
             //displayActionMessage('Feature not ready yet :)', 'info');
@@ -90,7 +91,6 @@ const Payment = ({ basket, shipping, payment, subtotal }) => {
       >
         {() => (
           <Form className="checkout-step-3">
-            <CreditPayment />
             <PayPalPayment />
             <Total
               isInternational={shipping.isInternational}

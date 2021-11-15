@@ -1,5 +1,5 @@
 import { ArrowRightOutlined, ShopOutlined } from '@ant-design/icons';
-import { BasketItem } from 'components/basket';
+import { BasketList } from 'components/basket';
 import { CHECKOUT_STEP_2 } from 'constants/routes';
 import { displayMoney } from 'helpers/utils';
 import { useDocumentTitle, useScrollTop } from 'hooks';
@@ -9,8 +9,10 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { StepTracker } from '../components';
 import withCheckout from '../hoc/withCheckout';
+import { useSelector } from 'react-redux';
 
 const OrderSummary = ({ basket, subtotal }) => {
+  const profile = useSelector((state) => state.profile);
   useDocumentTitle('Check Out Step 1 | Salinaka');
   useScrollTop();
   const dispatch = useDispatch();
@@ -28,12 +30,13 @@ const OrderSummary = ({ basket, subtotal }) => {
     <div className="checkout">
       <StepTracker current={1} />
       <div className="checkout-step-1">
-        <h3 className="text-center">Order Summary</h3>
-        <span className="d-block text-center">Review items in your basket.</span>
+        <h3 className="text-center" style={{color:'green'}}>Hey {profile.fullname} you have successfully placed an Order.</h3>
+        <span className="d-block text-center">List of Items Ordered.</span>
         <br />
         <div className="checkout-items">
           {basket.map((product) => (
-            <BasketItem
+            
+            <BasketList
               basket={basket}
               dispatch={dispatch}
               key={product.id}
@@ -43,31 +46,16 @@ const OrderSummary = ({ basket, subtotal }) => {
           ))}
         </div>
         <br />
-        <div className="basket-total text-right">
+        <div className="basket-total text-center">
           <p className="basket-total-title">Subtotal:</p>
-          <h2 className="basket-total-amount">{displayMoney(subtotal)}</h2>
+          <h2 className="basket-total-amount ">{displayMoney(subtotal)}</h2>
         </div>
         <br />
-        <div className="checkout-shipping-action">
-          <button
-            className="button button-muted"
-            onClick={onClickPrevious}
-            type="button"
-          >
-            <ShopOutlined />
-            &nbsp;
-            Continue Shopping
-          </button>
-          <button
-            className="button"
-            onClick={onClickNext}
-            type="submit"
-          >
-            Next Step
-            &nbsp;
-            <ArrowRightOutlined />
-          </button>
-        </div>
+        <h1 className="text-center" style={{color:'green'}}>We will send payment details to you mentioned Email Id and a cutomer executive will get in touch with You.</h1>
+            <br/>
+            <div class="flex-col my-auto text-center">
+                    <h4 class="ml-auto mr-3" > <a href="#"><u style={{color: '#8A2BE2'}}>View Details</u></a> </h4>
+            </div>
       </div>
     </div>
   );

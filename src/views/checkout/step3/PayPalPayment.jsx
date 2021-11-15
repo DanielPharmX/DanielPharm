@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useFormikContext } from 'formik';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const PayPalPayment = () => {
   const { values, setValues } = useFormikContext();
+  const profile = useSelector((state) => state.profile);
 
   return (
     <div className={`checkout-fieldset-collapse ${values.type === 'paypal' ? 'is-selected-payment' : ''}`}>
@@ -25,12 +27,11 @@ const PayPalPayment = () => {
             htmlFor="modePayPal"
           >
             <div className="d-flex-grow-1 margin-left-s">
-              <h4 className="margin-0">PayPal</h4>
+              <h4 className="margin-0">Pay Later</h4>
               <span className="text-subtle d-block margin-top-s">
-                Pay easily, fast and secure with PayPal.
+                Once you confirm the order you will receive the payment information on your mail.
               </span>
             </div>
-            <div className="payment-img payment-img-paypal" />
           </label>
         </div>
       </div>
