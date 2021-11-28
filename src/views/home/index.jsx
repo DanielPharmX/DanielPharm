@@ -50,8 +50,8 @@ const Home = () => {
         </div>
         <div className="display">
           <div className="display-header">
-            <h1>Featured Products</h1>
-            <Link to={FEATURED_PRODUCTS}>See All</Link>
+            <h2>Our Products</h2>
+            {/*<Link to={FEATURED_PRODUCTS}>See All</Link>*/}
           </div>
           {(errorFeatured && !isLoadingFeatured) ? (
             <MessageDisplay
@@ -66,7 +66,8 @@ const Home = () => {
             />
           )}
         </div>
-        <div className="display">
+
+        {/*<div className="display">
           <div className="display-header">
             <h1>Recommended Products</h1>
             <Link to={RECOMMENDED_PRODUCTS}>See All</Link>
@@ -83,7 +84,9 @@ const Home = () => {
               skeletonCount={6}
             />
           )}
-        </div>
+        </div>*/}
+
+
       </div>
     </main>
   );

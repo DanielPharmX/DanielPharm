@@ -31,7 +31,7 @@ const BasketItemControl = ({ product }) => {
       </button>
       <button
         className="button button-border button-border-gray button-small basket-control basket-control-minus"
-        disabled={product.quantity === 1}
+        disabled={product.quantity === 90}
         onClick={onMinusQty}
         type="button"
       >

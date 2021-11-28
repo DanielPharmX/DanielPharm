@@ -12,7 +12,8 @@ import CreditPayment from './CreditPayment';
 import PayPalPayment from './PayPalPayment';
 import { useDispatch, useSelector } from 'react-redux';
 import Total from './Total';
-import { useHistory } from 'react-router-dom';import { clearBasket } from 'redux/actions/basketActions';
+import { useHistory } from 'react-router-dom';
+import { clearBasket } from 'redux/actions/basketActions';
 
 //var beautify = require("json-beautify");
 const axios = require('axios');
@@ -36,6 +37,7 @@ const FormSchema = Yup.object().shape({
 });
 
 const Payment = ({ basket, shipping, payment, subtotal }) => {
+  const profile = useSelector((state) => state.profile);
   useDocumentTitle('Check Out Final Step | Medix');
   useScrollTop();
   const history = useHistory();
@@ -57,8 +59,14 @@ const Payment = ({ basket, shipping, payment, subtotal }) => {
   if (!shipping || !shipping.isDone) {
     return <Redirect to={CHECKOUT_STEP_1} />;
   }
+  
+  if (window.screen.width <= 800){
+    var margin='20%'
+  }else{
+    var margin='0%'
+  }
   return (
-    <div className="checkout">
+    <div className="checkout" style={{marginTop:margin}}>
       <StepTracker current={3} />
       <Formik
         initialValues={initFormikValues}
@@ -69,22 +77,24 @@ const Payment = ({ basket, shipping, payment, subtotal }) => {
            // alert("Hello")
           basket.map((product)=>{
             //alert(product.id+" "+product.name+" "+product.quantity)
-            JSON.stringify(product)
-          })
-         // alert(JSON.stringify(basket))
-          axios.post('http://localhost:8000/',JSON.stringify(basket))
-          .then(function (response) {
-            displayActionMessage('Feature not ready yet :)', 'info');
+            //JSON.stringify(product)
+           // console.log(JSON.stringify(product))
+           // console.log(product.id+" "+product.name+" "+product.quantity)
+     
+           const prod = {custName:shipping.fullname,custContact:shipping.mobile,custEmail:shipping.email,custAdd:shipping.address,productId: product.id, productName:product.name, productQuantity:product.quantity, price:product.price * product.quantity};
+           axios.post('http://192.168.0.193:8000/',prod).then(function (response) {
+            //displayActionMessage('Feature not ready yet :)', 'info');
             history.push(CHECKOUT_STEP_4)
-            //dispatch(clearBasket());
+
+           // dispatch(clearBasket());
             //history.push('/');
             //alert(response);
-          })
-          .catch(function (error) {
+            })
+        .catch(function (error) {
            // alert(error);
-          });
-            //alert(JSON.stringify(shipping))
-            //displayActionMessage('Feature not ready yet :)', 'info');
+         });
+          })
+       //     displayActionMessage('Feature not ready yet :)', 'info');
           }
         }}
         onSubmit={onConfirm}

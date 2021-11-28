@@ -13,8 +13,8 @@ router.get("/mine", isAuth, async (req, res) => {
   res.send(orders);
 });
 
-router.get("/:id", isAuth, async (req, res) => {
-  const order = await Order.findOne({ _id: req.params.id });
+router.get("/:email", async (req, res) => {
+  const order = await Order.findOne({ email: req.params.email });
   if (order) {
     res.send(order);
   } else {

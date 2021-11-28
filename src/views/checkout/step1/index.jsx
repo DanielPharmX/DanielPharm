@@ -23,9 +23,13 @@ const OrderSummary = ({ basket, subtotal }) => {
     //JSON.stringify(json_object)
     //alert(JSON.stringify(json_object))
   })
-
+  if (window.screen.width <= 800){
+    var margin='20%'
+  }else{
+    var margin='0%'
+  }
   return (
-    <div className="checkout">
+    <div className="checkout" style={{marginTop:margin}}>
       <StepTracker current={1} />
       <div className="checkout-step-1">
         <h3 className="text-center">Order Summary</h3>

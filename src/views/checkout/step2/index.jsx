@@ -65,9 +65,15 @@ const ShippingDetails = ({ profile, shipping, subtotal }) => {
     history.push(CHECKOUT_STEP_3);
   };
 
+  if (window.screen.width <= 800){
+    var margin='20%'
+  }else{
+    var margin='0%'
+  }
+
   return (
     <Boundary>
-      <div className="checkout">
+      <div className="checkout" style={{marginTop:margin}}>
         <StepTracker current={2} />
         <div className="checkout-step-2">
           <h3 className="text-center">Shipping Details</h3>

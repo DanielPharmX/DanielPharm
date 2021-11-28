@@ -18,8 +18,10 @@ class Firebase {
   createAccount = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
 
-  signIn = (email, password) =>
+  signIn = (email, password) =>{
     this.auth.signInWithEmailAndPassword(email, password);
+    
+  }
 
   signInWithGoogle = () =>
     this.auth.signInWithPopup(new app.auth.GoogleAuthProvider());

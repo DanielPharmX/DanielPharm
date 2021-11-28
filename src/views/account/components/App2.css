@@ -1,0 +1,28 @@
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 20px;
+  text-align: center;
+  float: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+a:hover {
+  color: green;
+  text-decoration: underline;
+}

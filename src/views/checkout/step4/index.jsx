@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 const OrderSummary = ({ basket, subtotal }) => {
   const profile = useSelector((state) => state.profile);
-  useDocumentTitle('Check Out Step 1 | Salinaka');
+  useDocumentTitle('Check Out Step 1 | Medix');
   useScrollTop();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -26,8 +26,14 @@ const OrderSummary = ({ basket, subtotal }) => {
     //alert(JSON.stringify(json_object))
   })
 
+  if (window.screen.width <= 800){
+    var margin='20%'
+  }else{
+    var margin='0%'
+  }
+
   return (
-    <div className="checkout">
+    <div className="checkout" style={{marginTop:margin}}>
       <StepTracker current={1} />
       <div className="checkout-step-1">
         <h3 className="text-center" style={{color:'green'}}>Hey {profile.fullname} you have successfully placed an Order.</h3>
@@ -51,7 +57,7 @@ const OrderSummary = ({ basket, subtotal }) => {
           <h2 className="basket-total-amount ">{displayMoney(subtotal)}</h2>
         </div>
         <br />
-        <h1 className="text-center" style={{color:'green'}}>We will send payment details to you mentioned Email Id and a cutomer executive will get in touch with You.</h1>
+        <h1 className="text-center" style={{color:'green'}}>We will send payment details to your mentioned Email Id and a customer executive will get in touch with You.</h1>
             <br/>
             <div class="flex-col my-auto text-center">
                     <h4 class="ml-auto mr-3" > <a href="#"><u style={{color: '#8A2BE2'}}>View Details</u></a> </h4>

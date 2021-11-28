@@ -6,7 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { selectFilter } from 'selectors/selector';
 
 const Shop = () => {
-  useDocumentTitle('Shop | Salinaka');
+  useDocumentTitle('Shop | Medix');
   useScrollTop();
 
   const store = useSelector((state) => ({
@@ -16,8 +16,14 @@ const Shop = () => {
     isLoading: state.app.loading
   }), shallowEqual);
 
+  if (window.screen.width <= 800){
+    var margin='20%'
+  }else{
+    var margin='1%'
+  }
+
   return (
-    <main className="content">
+    <main className="content" style={{marginTop:margin}}>
       <section className="product-list-wrapper">
         <AppliedFilters filteredProductsCount={store.filteredProducts.length} />
         <ProductList {...store}>

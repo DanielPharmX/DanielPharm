@@ -1,69 +1,58 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-//import 'materialize-css/dist/css/materialize.min.css';
-import './App.css'
+import { BasketList } from 'components/basket';
 // Just add this feature if you want :P
+import Modal from './modal'
+import { ImageLoader } from 'components/common';
+import { displayMoney } from 'helpers/utils';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+if (window.screen.width <= 800){
+  var margin='-150%';
+}else{
+  var margin='-60%';
+}
 
-const UserOrdersTab = () => (
-  <div className="loader" style={{ minHeight: '80vh' }}>
-    <h3>My Orders</h3>
-  
-    <div className="main_container">
-             
-             <div class="container padding-bottom-3x mb-1">
-             <div class="card mb-3">
-               <div class=" p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Tracking Order No - </span><span class="text-medium">001698653lp</span></div>
-               <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
-                 <div class="w-100 text-center py-1 px-2"><span class="text-medium">Shipped Via:</span> USPS Ground</div>
-                 <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> Checking Quality</div>
-                 <div class="w-100 text-center py-1 px-2"><span class="text-medium">Expected Date:</span> APR 27, 2021</div>
-               </div>
-               <div class="card-body">
-                 <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                   <div class="step completed">
-                     <div class="step-icon-wrap">
-                       <div class="step-icon"><i class="pe-7s-cart"></i></div>
-                     </div>
-                     <h4 class="step-title">Confirmed Order</h4>
-                   </div>
-                   <div class="step completed">
-                     <div class="step-icon-wrap">
-                       <div class="step-icon"><i class="pe-7s-config"></i></div>
-                     </div>
-                     <h4 class="step-title">Processing Order</h4>
-                   </div>
-                   <div class="step completed">
-                     <div class="step-icon-wrap">
-                       <div class="step-icon"><i class="pe-7s-medal"></i></div>
-                     </div>
-                     <h4 class="step-title">Quality Check</h4>
-                   </div>
-                   <div class="step completed">
-                     <div class="step-icon-wrap">
-                       <div class="step-icon"><i class="pe-7s-car"></i></div>
-                     </div>
-                     <h4 class="step-title">Product Dispatched</h4>
-                   </div>
-                   <div class="step">
-                     <div class="step-icon-wrap">
-                       <div class="step-icon"><i class="pe-7s-home"></i></div>
-                     </div>
-                     <h4 class="step-title">Product Delivered</h4>
-                   </div>
-                 </div>
-               </div>
-             </div>
-             <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
-               <div class="custom-control custom-checkbox mr-3">
-                 <input class="custom-control-input" type="checkbox" id="notify_me" checked="" />
-                 <label class="custom-control-label" for="notify_me">Notify me when order is delivered</label>
-               </div>
-               <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="#">View Order Details</a></div>
-             </div>
-           </div>
-     
-           </div>
+function populate(){
+ 
+}
+const UserOrdersTab = (props) => (
+ 
+  <div className="loader"  style={{ minHeight: '80vh' }}>
+   
+    <strong><span className="text-subtle">You don&apos;t have any orders</span></strong>
+    
+    <div className="basket-item" style={{marginTop:margin,backgroundColor:'white',width:'100%'}}>
+      
+      <div className="basket-item-wrapper">
+        <div className="basket-item-img-wrapper">
+          <ImageLoader
+            alt=''
+            className="basket-item-img"
+            src=''
+          />
+        </div>
+        <div className="basket-item-details">
+         
+          <div className="basket-item-specs">
+            <div>
+              <span className="spec-title">Quantity</span>
+              <h5 className="my-0"></h5>
+            </div>
+            <div>
+              <span className="spec-title">Order Status</span>
+              <h5 className="my-0">asd</h5>
+            </div>
+           
+          </div>
+        </div>
+        <div className="basket-item-price">
+          <h4 className="my-0"></h4>
+        </div>
+        <Modal/>
+      </div>
+    </div>
   </div>
 );
+
 
 export default UserOrdersTab;

@@ -2,3 +2,29 @@
       <circle cx="20.62" cy="20.62" r="20.62" />
       <circle className="fill-white" cx="29.97" cy="14.93" r="6.58" />
     </svg>
+
+
+
+    <div className="footer-col-1">
+        <strong>
+          <span>
+               <h2>ABOUT US</h2>
+          </span>
+
+          
+        </strong>
+      </div>
+      <div className="footer-col-2">
+        <img alt="Footer logo" className="footer-logo" src={logo} />
+        <h4> Copyright
+          &copy;&nbsp;
+          {new Date().getFullYear()}
+          &nbsp;medix101pharmacy.com
+        </h4>
+      </div>
+      <div className="footer-col-3" >
+        <strong>
+        <h4 style={{marginRight:"15%"}}>Secured By:</h4>
+        <img alt="Footer logo" src={logo1} style={{width:'15%', marginRight:'12%', marginTop:'-20px'}} />
+        </strong>
+      </div>

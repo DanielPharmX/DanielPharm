@@ -13,6 +13,11 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Select from 'react-select';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import PropType from 'prop-types';
+import { addQtyItem, minusQtyItem } from 'redux/actions/basketActions';
+
+import { useDispatch } from 'react-redux';
 
 const ViewProduct = () => {
   const { id } = useParams();
@@ -20,10 +25,11 @@ const ViewProduct = () => {
   const { addToBasket, isItemOnBasket } = useBasket(id);
   useScrollTop();
   useDocumentTitle(`View ${product?.name || 'Item'}`);
-
+  const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(product?.image || '');
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
+  const [selectedQuantity, setSelectedQuantity]=useState(1);
 
   const {
     recommendedProducts,
@@ -47,9 +53,22 @@ const ViewProduct = () => {
       colorOverlay.current.value = color;
     }
   };
-
+ 
   const handleAddToBasket = () => {
-    addToBasket({ ...product, selectedColor, selectedSize: selectedSize || product.sizes[0] });
+    
+    addToBasket({ ...product, quantity: selectedQuantity });
+  };
+
+  const onAddQty = () => {
+    if (product.quantity < product.maxQuantity) {
+      dispatch(addQtyItem(product.id));
+    }
+  };
+
+  const onMinusQty = () => {
+    if ((product.maxQuantity >= product.quantity) && product.quantity !== 0) {
+      dispatch(minusQtyItem(product.id));
+    }
   };
 
   return (
@@ -109,18 +128,47 @@ const ViewProduct = () => {
               <br />
               <div>
                 <span className="text-subtle">Quantity</span>
+                <h3>{selectedQuantity*90}</h3>
                 <br />
-                <br />
-                <Select
+                
+                
+              {/*  <input
+                  type="text"
                   placeholder="--Select Quantity--"
                   onChange={onSelectedSizeChange}
-                  options={product.sizes.sort((a, b) => (a < b ? -1 : 1)).map((size) => ({ label: `${size} pills`, value: size }))}
                   styles={{ menu: (provided) => ({ ...provided, zIndex: 10 }) }}
                 />
+              */}
               </div>
-              <br />
+
+              <div className="basket-item-control">
+                <button
+                  className="button button-border button-border-gray button-small basket-control basket-control-add"
+                  disabled={product.maxQuantity === product.quantity}
+                  onClick={()=>{
+                    setSelectedQuantity(selectedQuantity+1)
+                    onAddQty();
+                  }}
+                  type="button"
+                >
+                <PlusOutlined style={{ fontSize: '9px' }} />
+                </button>
+                <button
+                  className="button button-border button-border-gray button-small basket-control basket-control-minus"
+                  disabled={product.quantity === 90}
+                  onClick={()=>{
+                    selectedQuantity==1?setSelectedQuantity(1):setSelectedQuantity(selectedQuantity-1);
+                    onMinusQty();
+                  }}
+                  type="button"
+                  >
+                  <MinusOutlined style={{ fontSize: '9px' }} />
+                </button>
+    </div>
+
+
               
-              <h1>{displayMoney(product.price)}</h1>
+              <h1>{displayMoney(product.price*selectedQuantity)}</h1>
               <div className="product-modal-action">
                 <button
                   className={`button button-small ${isItemOnBasket(product.id) ? 'button-border button-border-gray' : ''}`}

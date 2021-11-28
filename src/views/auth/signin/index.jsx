@@ -29,7 +29,7 @@ const SignIn = ({ history }) => {
   const dispatch = useDispatch();
 
   useScrollTop();
-  useDocumentTitle('Sign In | Salinaka');
+  useDocumentTitle('Sign In | Medix');
 
   useEffect(() => () => {
     dispatch(setAuthStatus(null));
@@ -46,8 +46,13 @@ const SignIn = ({ history }) => {
     if (isAuthenticating) e.preventDefault();
   };
 
+  if (window.screen.width <= 800){
+    var margin='18%'
+  }else{
+    var margin='1%'
+  }
   return (
-    <div className="auth-content">
+    <div className="auth-content" style={{marginTop:margin}}>
       {authStatus?.success && (
         <div className="loader">
           <h3 className="toast-success auth-success">
@@ -65,7 +70,7 @@ const SignIn = ({ history }) => {
           )}
           <div className={`auth ${authStatus?.message && (!authStatus?.success && 'input-error')}`}>
             <div className="auth-main">
-              <h3>Sign in to Salinaka</h3>
+              <h3>Sign in to Medix Pharmacy</h3>
               <br />
               <div className="auth-wrapper">
                 <Formik
@@ -123,10 +128,10 @@ const SignIn = ({ history }) => {
                 </Formik>
               </div>
             </div>
-            <div className="auth-divider">
+           {/* <div className="auth-divider">
               <h6>OR</h6>
             </div>
-            <SocialLogin isLoading={isAuthenticating} />
+                  <SocialLogin isLoading={isAuthenticating} />*/}
           </div>
           <div className="auth-message">
             <span className="auth-info">

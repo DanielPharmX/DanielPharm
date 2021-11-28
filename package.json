@@ -13,6 +13,7 @@
   "scripts": {
     "serve": "live-server dist/",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js",
+    "launch": "webpack serve --config webpack/dev.config.js --host 0.0.0.0 --open --useLocalIp",
     "dev-server": "webpack serve --config webpack/dev.config.js",
     "prod-server": "webpack serve --config webpack/prod.config.js",
     "dev": "webpack serve --config webpack/dev.config.js --host 0.0.0.0 --open --useLocalIp",
@@ -76,8 +77,9 @@
     "react": "^17.0.2",
     "react-compound-slider": "^3.3.1",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-loading-skeleton": "^2.2.0",
-    "react-modal": "^3.13.1",
+    "react-modal": "^3.14.4",
     "react-phone-input-2": "^2.14.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",

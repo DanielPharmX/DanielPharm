@@ -24,6 +24,12 @@ const SignInSchema = Yup.object().shape({
     .min(4, 'Name should be at least 4 characters.')
 });
 
+if (window.screen.width <= 800){
+  var margin='18%'
+}else{
+  var margin='1%'
+}
+
 const SignUp = ({ history }) => {
   const { isAuthenticating, authStatus } = useSelector((state) => ({
     isAuthenticating: state.app.isAuthenticating,
@@ -32,7 +38,7 @@ const SignUp = ({ history }) => {
   const dispatch = useDispatch();
 
   useScrollTop();
-  useDocumentTitle('Sign Up | Salinaka');
+  useDocumentTitle('Sign Up | Medix');
 
   useEffect(() => () => {
     dispatch(setAuthStatus(null));
@@ -50,7 +56,7 @@ const SignUp = ({ history }) => {
   };
 
   return (
-    <div className="auth-content">
+    <div className="auth-content" style={{marginTop:margin}}>
       {authStatus?.success && (
         <div className="loader">
           <h3 className="toast-success auth-success">
@@ -68,7 +74,7 @@ const SignUp = ({ history }) => {
           )}
           <div className={`auth ${authStatus?.message && (!authStatus?.success && 'input-error')}`}>
             <div className="auth-main">
-              <h3>Sign up to Salinaka</h3>
+              <h3>Sign up to Medix</h3>
               <Formik
                 initialValues={{
                   fullname: '',
@@ -128,10 +134,7 @@ const SignUp = ({ history }) => {
                 )}
               </Formik>
             </div>
-            <div className="auth-divider">
-              <h6>OR</h6>
-            </div>
-            <SocialLogin isLoading={isAuthenticating} />
+            
           </div>
           <div className="auth-message">
             <span className="auth-info">

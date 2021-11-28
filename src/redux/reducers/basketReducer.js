@@ -29,7 +29,7 @@ export default (state = [], action) => {
       });
     case MINUS_QTY_ITEM:
       return state.map((product) => {
-        if (product.id === action.payload) {
+        if (product.id === action.payload && product.quantity != 1) {
           return {
             ...product,
             quantity: product.quantity - 1

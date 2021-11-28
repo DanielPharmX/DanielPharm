@@ -3,6 +3,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { useDocumentTitle, useScrollTop } from 'hooks';
 import React, { lazy, Suspense } from 'react';
 import UserTab from '../components/UserTab';
+import {useState,useEffect} from 'react'; 
 
 const UserAccountTab = lazy(() => import('../components/UserAccountTab'));
 const UserWishListTab = lazy(() => import('../components/UserWishListTab'));
@@ -17,7 +18,14 @@ const Loader = () => (
 
 const UserAccount = () => {
   useScrollTop();
-  useDocumentTitle('My Account | Salinaka');
+  useDocumentTitle('My Account | Medix');
+  const [order, setOrder] = useState({});
+  useEffect(() => {
+    fetch("http://localhost:8000/api/orders/hmzaql9454@gmail.com")
+      .then((res) => res.json())
+      .then((data) => {setOrder(data);}).catch(()=>{alert('Hello')});
+  }, []);
+
 
   return (
     <UserTab>
@@ -33,7 +41,7 @@ const UserAccount = () => {
       </div>
       <div index={2} label="My Orders">
         <Suspense fallback={<Loader />}>
-          <UserOrdersTab />
+          <UserOrdersTab orderObj={order}/>
         </Suspense>
       </div>
     </UserTab>
